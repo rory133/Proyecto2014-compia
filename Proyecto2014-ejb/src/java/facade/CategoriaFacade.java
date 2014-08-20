@@ -13,12 +13,14 @@ import entidades.Categoria;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import utilidades.Loggable;
 
 /**
  *
  * @author juanma
  */
 @Stateless
+@Loggable
 public class CategoriaFacade extends AbstractFacade<Categoria> {
     @PersistenceContext(unitName = "Proyecto2014-ejbPU")
     private EntityManager em;

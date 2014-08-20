@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.TreeNode;
+import utilidades.Loggable;
 
 /**
  *
@@ -28,6 +29,7 @@ import org.primefaces.model.TreeNode;
 //@Dependent
 @ManagedBean(name="treeSelectionView")
 @ViewScoped
+@Loggable
 public class SelectionView {
 
  private TreeNode root1;

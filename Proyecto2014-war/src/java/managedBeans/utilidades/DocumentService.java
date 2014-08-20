@@ -9,20 +9,21 @@
 
 package managedBeans.utilidades;
 
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import com.google.common.collect.Table;
+import entidades.Categoria;
 import facade.CategoriaFacade;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.enterprise.context.Dependent;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import entidades.Categoria;
+import javax.inject.Named;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
+import utilidades.Loggable;
 
 /**
  *
@@ -31,6 +32,7 @@ import org.primefaces.model.TreeNode;
 //@Named(value = "documentService")
 @ManagedBean(name = "documentService")
 @ApplicationScoped
+@Loggable
 public class DocumentService {
 
  @EJB CategoriaFacade categoriaFacade;
