@@ -93,9 +93,10 @@ public class Categoria implements Serializable {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        if ((this.descripcion!="")&&(this.descripcion!=null))
+           return descripcion;
+        else return "sin descripcion";
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -148,7 +149,8 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Categoria[ idcategoria=" + idcategoria + " ]";
+        //return "entidades.Categoria[ idcategoria=" + idcategoria + " ]";
+        return this.getDescripcion();
     }
     
 }
