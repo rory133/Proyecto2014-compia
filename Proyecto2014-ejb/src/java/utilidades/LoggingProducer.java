@@ -60,15 +60,19 @@ public Logger produceLogger(InjectionPoint injectionPoint) throws IOException {
 //    Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName()).setUseParentHandlers(false);
 //    System.out.println("********loogginfPruducer");
     FileHandler fh;  
-
+    
     try {  
 
         // se configura el logger con un fileHandler y el formato  
        //fh = new FileHandler("C:/logsProyecto/MyLogFile.%u.%g.log",1024 * 1024, 1, true);  
-        fh = new FileHandler("C:/logsProyecto/MyLogFile.%u.%g.log",1024 * 1024,2, true); 
+        //fh = new FileHandler("C:/logsProyecto/MyLogFile.%u.%g.log",1024 * 1024,2, true); 
+        //fh = new FileHandler("C:/logsProyecto/MyLogFile.log",1024 * 1024,2, true);
+        fh = new FileHandler("C:/logsProyecto/logfile%g.txt",1024 * 1024,2, true); 
+        
         SimpleFormatter formatter = new SimpleFormatter();  
         fh.setFormatter(formatter);  
         Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName()).addHandler(fh);
+        
         
         
 
