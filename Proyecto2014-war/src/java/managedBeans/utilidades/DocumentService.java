@@ -32,10 +32,11 @@ import utilidades.Loggable;
 //@Named(value = "documentService")
 @ManagedBean(name = "documentService")
 @ApplicationScoped
-@Loggable
+//@Loggable
 public class DocumentService {
 
- @EJB CategoriaFacade categoriaFacade;
+       @EJB 
+       CategoriaFacade categoriaFacade;
        List<Categoria> categorias;
        List<Categoria> categoriasRaiz;
        TreeNode root;
@@ -137,7 +138,7 @@ public class DocumentService {
        categorias =categoriaFacade.findAll();
        categoriasRaiz=seleccionaRaiz(categorias);
        //TreeNode root = new DefaultTreeNode(null, null);
-      root = new DefaultTreeNode("hola",new Categoria(), null);
+      root = new DefaultTreeNode("raiz",new Categoria(), null);
       
        recorreArbol(categoriasRaiz);
         //documents = new DefaultTreeNode(new Categoria(), root);

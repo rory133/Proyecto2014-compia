@@ -9,12 +9,12 @@
         <h:head>
             <f:facet name="Principal">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Pagina Principal</title>
+                <title>Pagina Principal Administrador</title>
             </f:facet>
-            <!--
+        <!--
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
-            -->
+        -->
         </h:head>
 
         <h:body>
@@ -22,8 +22,16 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                        cabecera
-                          <h:link outcome="login" value="logarse" />
+                        cabecera administrador
+                        
+                                   <br/>            
+            <h:outputText value="#{loginBean.login}"/>
+            <br/>            
+            <h:outputText value="#{sessionScope.usuario.nombre}" /> 
+            <br/>            
+            <h:outputText value="#{sessionScope.login.role}" />
+            <br/>
+                          <h:link outcome="/login" value="logarse" />
                 </p:layoutUnit>
                 <!--
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">

@@ -20,7 +20,7 @@ import utilidades.Loggable;
  * @author juanma
  */
 @Stateless
-@Loggable
+//@Loggable
 public class CategoriaFacade extends AbstractFacade<Categoria> {
     @PersistenceContext(unitName = "Proyecto2014-ejbPU")
     private EntityManager em;

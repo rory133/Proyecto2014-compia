@@ -8,7 +8,7 @@
 
         <class>utilidades.LoggingInterceptor</class>
         <class>utilidades.ExceptionInterceptor</class>
-        
+      
     </interceptors>
     
 </beans>

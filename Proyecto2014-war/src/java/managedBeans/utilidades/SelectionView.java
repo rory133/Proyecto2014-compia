@@ -29,8 +29,9 @@ import utilidades.Loggable;
 //@Dependent
 @ManagedBean(name="treeSelectionView")
 @ViewScoped
-@Loggable
-public class SelectionView {
+//@Loggable
+//public class SelectionView implements Serializable {
+public class SelectionView  {
 
  private TreeNode root1;
     private TreeNode root2;

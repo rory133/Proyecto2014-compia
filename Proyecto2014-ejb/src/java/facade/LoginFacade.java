@@ -13,6 +13,7 @@ import entidades.Login;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -31,5 +32,27 @@ public class LoginFacade extends AbstractFacade<Login> {
     public LoginFacade() {
         super(Login.class);
     }
+    
+    public Login ValidarLogin (String loginB, String passwordB){
+        Login encontrado=null;
+        System.out.println("@@@entro en validarLogin con login:  " +loginB+" passwordB: "+passwordB);
+        try{
+            Query query=
+                    getEntityManager().createQuery(
+                    "SELECT log FROM Login log WHERE log.login = :loginB and log.password = :passwordB");
+            query.setParameter("loginB" , loginB);
+            query.setParameter ("passwordB" , passwordB);
+            
+            encontrado=(Login) query.getSingleResult();
+            System.out.println("@@@en validarLogin encontrado: "+encontrado.getLogin().toString());
+        }catch (Exception e){
+            System.out.println("@@@error en ValidarLogin: "+e.toString());
+        }
+         
+        return encontrado;
+            
+    } 
+        
+    
     
 }
