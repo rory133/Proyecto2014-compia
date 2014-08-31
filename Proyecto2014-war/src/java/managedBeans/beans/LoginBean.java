@@ -13,14 +13,18 @@ import entidades.Login;
 import entidades.Usuario;
 import facade.LoginFacade;
 import facade.UsuarioFacade;
+import java.io.IOException;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import utilidades.Loggable;
 
@@ -137,5 +141,44 @@ public String validarUsuario(){
       }
       return "login";
    }
-   
+public void logout(){  
+    System.out.println("entro en logout()");
+    String retorno;
+    retorno = "../index?faces-redirect=true";
+//    FacesContext context = FacesContext.getCurrentInstance();
+//    HttpServletRequest request =
+//            (HttpServletRequest) context.getExternalContext().getRequest();
+//    try{
+//        
+//        request.logout();
+//        System.out.println(" saliendo de logout" );
+//    } catch (ServletException e){
+//        System.out.println("en el catch" );
+//    }
+    
+//        System.out.println("antes del retorno" );
+//    return retorno;
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        ExternalContext externalContext = context.getExternalContext();
+
+        Object session = externalContext.getSession(false);
+
+        HttpSession httpSession = (HttpSession) session;
+
+        httpSession.invalidate();
+    
+        try {
+        System.out.println("contexto---->:"+FacesContext.getCurrentInstance().getExternalContext().toString());
+        FacesContext.getCurrentInstance().getExternalContext()
+        .redirect("../index.xhtml");
+        } catch (IOException e) {
+        e.printStackTrace();
+        }
+     }
+
+
+        
+
+
 }
