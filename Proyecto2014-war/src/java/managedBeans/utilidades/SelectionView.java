@@ -9,15 +9,16 @@
 
 package managedBeans.utilidades;
 
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import org.primefaces.model.TreeNode;
 import utilidades.Loggable;
 
@@ -27,6 +28,8 @@ import utilidades.Loggable;
  */
 //@Named(value = "selectionView")
 //@Dependent
+//@RequestScoped
+
 @ManagedBean(name="treeSelectionView")
 @ViewScoped
 //@Loggable

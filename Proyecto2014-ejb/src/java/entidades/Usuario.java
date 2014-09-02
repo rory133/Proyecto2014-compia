@@ -73,7 +73,7 @@ public class Usuario implements Serializable {
     @Column(name = "localizacion")
     private String localizacion;
     @Column(name = "votos_negativos")
-    private Boolean votosNegativos;
+    private Integer votosNegativos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAtiende")
     private List<MalaClasificacion> malaClasificacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioAvisa")
@@ -153,11 +153,11 @@ public class Usuario implements Serializable {
         this.localizacion = localizacion;
     }
 
-    public Boolean getVotosNegativos() {
+    public Integer getVotosNegativos() {
         return votosNegativos;
     }
 
-    public void setVotosNegativos(Boolean votosNegativos) {
+    public void setVotosNegativos(Integer votosNegativos) {
         this.votosNegativos = votosNegativos;
     }
 

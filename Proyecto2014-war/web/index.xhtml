@@ -11,10 +11,10 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Pagina Principal</title>
             </f:facet>
-            
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-            
+
+            <h:outputStylesheet name="./css/default.css"/>
+            <h:outputStylesheet name="./css/cssLayout.css"/>
+
         </h:head>
 
         <h:body>
@@ -22,8 +22,10 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                        cabecera
-                          <h:link outcome="login" value="logarse" />
+                    cabecera
+                    <h:link outcome="login" value="logarse" />
+                    <br/>
+                    <h:link outcome="crearUsuario" value="Crear cuenta" />
                 </p:layoutUnit>
                 <!--
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -37,8 +39,8 @@
 
                         <h3 style="margin-top:0">Single</h3>
                         <p:tree value="#{treeSelectionView.root1}" var="doc"
-                                    selectionMode="single"
-                                    selection="#{treeSelectionView.selectedNode}">
+                                selectionMode="single"
+                                selection="#{treeSelectionView.selectedNode}">
                             <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
                                 <h:outputText value="#{doc.nombre}"/>
                             </p:treeNode>
@@ -54,8 +56,8 @@
                         </p:tree>
 
                         <p:commandButton value="Display" update="msgs" icon="ui-icon-newwin"
-                                            actionListener="#{treeSelectionView.displaySelectedSingle}"/>
-                  </h:form>
+                                         actionListener="#{treeSelectionView.displaySelectedSingle}"/>
+                    </h:form>
 
                 </p:layoutUnit>
 
@@ -65,6 +67,8 @@
 
             </p:layout>
 
+            <br />
+            <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
         </h:body>
 
     </f:view>
