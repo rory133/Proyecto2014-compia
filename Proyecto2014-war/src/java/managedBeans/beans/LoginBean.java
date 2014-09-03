@@ -114,16 +114,22 @@ public String validarUsuario(){
             session.setAttribute("login", usuarioLogado);
             datosUsuarioLogado=(Usuario)usuarioFacade.find(usuarioLogado.getUsuarioIdusuario().getIdusuario());
             session.setAttribute("usuario", datosUsuarioLogado);
+            
             facesMessage=new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
+            session.setMaxInactiveInterval(20*60*60);
             /*
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("Welcome " + usuarioLogado.getLogin() ));
             faceContext.addMessage(null, facesMessage);
                     */
             if (usuarioLogado.getRole().toString().matches("ROLE_ADMIN")){
+                session.setAttribute("ROLE_ADMIN", true);
+                session.setAttribute("ROLE_SOCIO", false);
                 System.out.println("es adminstrador" );
                 return "/admin/index?faces-redirect=true";
             }else if (usuarioLogado.getRole().toString().matches("ROLE_SOCIO")){
+                session.setAttribute("ROLE_ADMIN", false);
+                session.setAttribute("ROLE_SOCIO", true);
                   System.out.println("es socio");
                  return "/usuario/index?faces-redirect=true";
             }else

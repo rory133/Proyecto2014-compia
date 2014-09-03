@@ -27,23 +27,23 @@
             <h:outputText value="#{userBean.nombre}" />
             
             <h:outputLabel for="apellidos" value="Apellidos: " />
-            <p:inputText id="apellidos" value="#{userBean.apellidos}" label="nombre"/>
+            <p:inputText id="apellidos" value="#{userBean.apellidos}" label="apellidos"/>
             <p:message for="apellidos" />
             <h:outputText value="#{userBean.apellidos}" /> 
             
             <h:outputLabel for="email" value="Email: " />
-            <p:inputText id="email" value="#{userBean.email}" label="nombre"/>
+            <p:inputText id="email" value="#{userBean.email}" label="email"/>
             <p:message for="email" />
             <h:outputText value="#{userBean.email}" /> 
             
             <h:outputLabel for="web" value="web: " />
-            <p:inputText id="web" value="#{userBean.web}" label="nombre"/>
+            <p:inputText id="web" value="#{userBean.web}" label="web"/>
             <p:message for="web" />
             <h:outputText value="#{userBean.web}" /> 
             
             
             <h:outputLabel for="localizacion" value="localizacion: " />
-            <p:inputText id="localizacion" value="#{userBean.localizacion}" label="nombre">
+            <p:inputText id="localizacion" value="#{userBean.localizacion}" label="localizacion">
                      <f:validateLength minimum="4" />
             </p:inputText>
             <p:message for="localizacion" />
@@ -52,7 +52,7 @@
             
             
             <h:outputLabel for="loginUsuario" value="loginUsuario: " />
-            <p:inputText id="loginUsuario" value="#{userBean.loginUsuario}" label="nombre"/>
+            <p:inputText id="loginUsuario" value="#{userBean.loginUsuario}" label="login"/>
             <p:message for="loginUsuario" />
             <h:outputText value="#{userBean.loginUsuario}" /> 
             

@@ -11,15 +11,26 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Pagina Principal Usuario</title>
             </f:facet>
-            <!--
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-            -->
+        <!--    
+        <h:outputStylesheet name="../../../resources/css/default.css"/>
+        <h:outputStylesheet name="../../resources/css/cssLayout.css"/>
+       
+        
+        <link type="text/css" rel="stylesheet" 
+		  href="/JavaServerFaces/faces/javax.faces.resource/cssLayout.css?ln=css" />
+         <link type="text/css" rel="stylesheet" 
+		  href="/JavaServerFaces/faces/javax.faces.resource/default2.css?ln=css" />
+          -->
+         <h:outputStylesheet library="css" name="default.css"  />
+         <h:outputStylesheet library="css" name="cssLayout.css"  />
+         
+         
+         
         </h:head>
 
         <h:body>
 
-            <p:layout fullPage="true">
+            <p:layout fullPage="true" rendered="#{ROLE_SOCIO}">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                         cabecera usuario
@@ -76,6 +87,12 @@
                 </p:layoutUnit>
 
             </p:layout>
+            <h:outputText value="no estas reginstrado como socio y no pudes acceder a esta pagina"    rendered="#{ROLE_ADMIN}" />
+            <BR/>
+             <h:link outcome="/admin/index" value="volver"   rendered="#{ROLE_ADMIN}" />
+            <h:outputText value="no estas logado para poder acceder a esta pagina"    rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
+            <BR/>
+            <h:link outcome="/faces/index" value="volver" rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
 
         </h:body>
 

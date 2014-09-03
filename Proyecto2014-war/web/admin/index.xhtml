@@ -15,15 +15,19 @@
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         -->
+        <h:outputStylesheet library="css" name="default.css"  />
+        <h:outputStylesheet library="css" name="cssLayout.css"  />
+        
+        
         </h:head>
 
         <h:body>
 
-            <p:layout fullPage="true">
-
+            <p:layout fullPage="true" rendered="#{ROLE_ADMIN}">
+                
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                         cabecera administrador
-                        
+                   
                                    <br/>     
             
             <h:outputText value="#{loginBean.login}"/>
@@ -37,6 +41,9 @@
             <p:commandButton value="logout" icon="ui-icon-newwin"
                                actionListener="#{loginBean.logout()}"/>
             </h:form>
+            <h:outputText value=" el role es: " />
+                <h:outputText value=" #{sessionScope.login.role }" />
+           
                    
                 </p:layoutUnit>
                 <!--
@@ -78,6 +85,12 @@
                 </p:layoutUnit>
 
             </p:layout>
+            <h:outputText value="no eres administrador y no puedes acceder a esta pagina"    rendered="#{ROLE_SOCIO}" />
+            <BR/>
+             <h:link outcome="/usuario/index" value="volver"   rendered="#{ROLE_SOCIO}" />
+            <h:outputText value="no estas logado para poder acceder a esta pagina"    rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
+            <BR/>
+            <h:link outcome="/faces/index" value="volver" rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
 
         </h:body>
 
