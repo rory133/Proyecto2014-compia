@@ -11,16 +11,7 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Pagina Principal Usuario</title>
             </f:facet>
-        <!--    
-        <h:outputStylesheet name="../../../resources/css/default.css"/>
-        <h:outputStylesheet name="../../resources/css/cssLayout.css"/>
-       
-        
-        <link type="text/css" rel="stylesheet" 
-		  href="/JavaServerFaces/faces/javax.faces.resource/cssLayout.css?ln=css" />
-         <link type="text/css" rel="stylesheet" 
-		  href="/JavaServerFaces/faces/javax.faces.resource/default2.css?ln=css" />
-          -->
+
          <h:outputStylesheet library="css" name="default.css"  />
          <h:outputStylesheet library="css" name="cssLayout.css"  />
          
@@ -30,7 +21,7 @@
 
         <h:body>
 
-            <p:layout fullPage="true" rendered="#{ROLE_SOCIO}">
+ <p:layout fullPage="true" rendered="#{ROLE_SOCIO}">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                         cabecera usuario
@@ -47,20 +38,14 @@
               <p:commandButton value="logout" icon="ui-icon-newwin"
                                actionListener="#{loginBean.logout()}"/>
             </h:form>
-            
-            <h:link outcome="crearProducto" value="Crear un producto"  />
                 </p:layoutUnit>
-                <!--
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-                -->
+
 
                 <p:layoutUnit position="west" size="25%" header="Categorias" collapsible="false">
                     <h:form>
                         <p:growl id="msgs" showDetail="true" escape="false"/>
 
-                        <h3 style="margin-top:0">Single</h3>
+                        <h3 style="margin-top:0">Selecciona la categoría</h3>
                         <p:tree value="#{treeSelectionView.root1}" var="doc"
                                     selectionMode="single"
                                     selection="#{treeSelectionView.selectedNode}">
@@ -84,11 +69,60 @@
 
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
-                </p:layoutUnit>
+     <p:layoutUnit position="center">
+       <h:form>
+         <p:panel id="panel" header="Crear Producto Nuevo">
+           <h:outputText value="Selecciona en el panel de la izquierda en que categoría lo quieres incluir" /> 
+             
+            <br/>   
+         <h:panelGrid columns="4" cellpadding="5">
 
-            </p:layout>
+            
+            <h:outputLabel for="nombre" value="Nombre: " />
+            <p:inputText id="nombre" value="#{crearProductoBean.nombre}" label="nombre">
+                <f:validateLength minimum="4" />
+            </p:inputText>
+            <p:message for="nombre" />
+            <h:outputText value="#{crearProductoBean.nombre}" />
+            
+
+
+            
+            
+            <h:outputLabel for="precio" value="precio: " />
+            <p:inputText id="precio" value="#{crearProductoBean.precio}" label="precio">
+               <f:validateDoubleRange minimum="1.00" maximum="12000.00" />
+            </p:inputText>
+            <p:message for="precio" />
+            <h:outputText value="#{crearProductoBean.precio}" />
+        </h:panelGrid>
+            
+            
+        <h:panelGrid columns="3" cellpadding="2">         
+            
+            <h:outputLabel for="descripcion" value="descripcion: " />
+            <p:inputTextarea rows="5" cols="30" counter="display" maxlength="400" counterTemplate="{0} characters remaining." autoResize="false" 
+             id="descripcion" value="#{crearProductoBean.descripcion}" label="descripcion">   
+              <f:validateLength minimum="10" />
+            </p:inputTextarea>
+            <h:outputText id="display" />
+             <h:outputLabel value="" />
+             <h:outputLabel value="" />
+            <p:message for="descripcion" />  
+            
+         </h:panelGrid>           
+            
+        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+            <h:outputText value="¿Poner en modo subasta?: " />
+            <p:selectBooleanCheckbox value="#{crearProductoBean.enSubasta}" />
+        </h:panelGrid>
+                    
+       </p:panel>   
+           <p:commandButton value="Crear producto"  update="panel" action="#{crearProductoBean.guardarProducto(categoria)}" icon="ui-icon-check" />
+     </h:form>               
+    </p:layoutUnit>
+
+ </p:layout>
             <h:outputText value="no estas reginstrado como socio y no pudes acceder a esta pagina"    rendered="#{ROLE_ADMIN}" />
             <BR/>
              <h:link outcome="/admin/index" value="volver"   rendered="#{ROLE_ADMIN}" />
@@ -100,3 +134,4 @@
 
     </f:view>
 </html>
+

@@ -10,11 +10,10 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,19 +21,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author juanma
  */
 @Entity
-@Table(name = "producto")
+@Table(name = "producto", catalog = "portalsubastas", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
@@ -42,46 +39,43 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
     @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio"),
-    @NamedQuery(name = "Producto.findByVendido", query = "SELECT p FROM Producto p WHERE p.vendido = :vendido")})
+    @NamedQuery(name = "Producto.findByVendido", query = "SELECT p FROM Producto p WHERE p.vendido = :vendido"),
+    @NamedQuery(name = "Producto.findByEnSubasta", query = "SELECT p FROM Producto p WHERE p.enSubasta = :enSubasta")})
 public class Producto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idproducto")
+    @Column(name = "idproducto", nullable = false)
     private Integer idproducto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false, length = 400)
     private String descripcion;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "precio")
+    @Column(name = "precio", nullable = false)
     private float precio;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "vendido")
+    @Column(name = "vendido", nullable = false)
     private boolean vendido;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<Imagen> imagenList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<MalaClasificacion> malaClasificacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<Puja> pujaList;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
-    @ManyToOne(optional = false)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "enSubasta", nullable = false)
+    private boolean enSubasta;
+    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Usuario usuarioIdusuario;
-    @JoinColumn(name = "categoria_idcategoria", referencedColumnName = "idcategoria")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "categoria_idcategoria", referencedColumnName = "idcategoria", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Categoria categoriaIdcategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoIdproducto")
-    private List<Venta> ventaList;
 
     public Producto() {
     }
@@ -90,12 +84,13 @@ public class Producto implements Serializable {
         this.idproducto = idproducto;
     }
 
-    public Producto(Integer idproducto, String nombre, String descripcion, float precio, boolean vendido) {
+    public Producto(Integer idproducto, String nombre, String descripcion, float precio, boolean vendido, boolean enSubasta) {
         this.idproducto = idproducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.vendido = vendido;
+        this.enSubasta = enSubasta;
     }
 
     public Integer getIdproducto() {
@@ -138,31 +133,12 @@ public class Producto implements Serializable {
         this.vendido = vendido;
     }
 
-    @XmlTransient
-    public List<Imagen> getImagenList() {
-        return imagenList;
+    public boolean getEnSubasta() {
+        return enSubasta;
     }
 
-    public void setImagenList(List<Imagen> imagenList) {
-        this.imagenList = imagenList;
-    }
-
-    @XmlTransient
-    public List<MalaClasificacion> getMalaClasificacionList() {
-        return malaClasificacionList;
-    }
-
-    public void setMalaClasificacionList(List<MalaClasificacion> malaClasificacionList) {
-        this.malaClasificacionList = malaClasificacionList;
-    }
-
-    @XmlTransient
-    public List<Puja> getPujaList() {
-        return pujaList;
-    }
-
-    public void setPujaList(List<Puja> pujaList) {
-        this.pujaList = pujaList;
+    public void setEnSubasta(boolean enSubasta) {
+        this.enSubasta = enSubasta;
     }
 
     public Usuario getUsuarioIdusuario() {
@@ -179,15 +155,6 @@ public class Producto implements Serializable {
 
     public void setCategoriaIdcategoria(Categoria categoriaIdcategoria) {
         this.categoriaIdcategoria = categoriaIdcategoria;
-    }
-
-    @XmlTransient
-    public List<Venta> getVentaList() {
-        return ventaList;
-    }
-
-    public void setVentaList(List<Venta> ventaList) {
-        this.ventaList = ventaList;
     }
 
     @Override
