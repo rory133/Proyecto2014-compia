@@ -9,6 +9,7 @@
 
 package managedBeans.utilidades;
 
+import entidades.Categoria;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
@@ -35,7 +36,8 @@ import utilidades.Loggable;
 //@Loggable
 //public class SelectionView implements Serializable {
 public class SelectionView  {
-
+ private Categoria categoriaSelec;
+ private String nombreCategoria;
  private TreeNode root1;
 //    private TreeNode root2;
 //    private TreeNode root3;
@@ -49,6 +51,7 @@ public class SelectionView  {
     @PostConstruct
     public void init() {
         root1 = service.createDocuments();
+        
 //        root2 = service.createDocuments();
 //        root3 = service.createDocuments();
     }
@@ -92,6 +95,24 @@ public class SelectionView  {
     public void setService(DocumentService service) {
         this.service = service;
     }
+
+    public Categoria getCategoriaSelec() {
+        return categoriaSelec;
+    }
+
+    public void setCategoriaSelec(Categoria categoriaSelec) {
+        this.categoriaSelec = categoriaSelec;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+    
+    
  
     public void displaySelectedSingle() {
         if(selectedNode != null) {
@@ -110,6 +131,21 @@ public class SelectionView  {
             }
  
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", builder.toString());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+        public void sumaCategoria() {
+        if(selectedNode != null) {
+           
+            System.out.println("entro en suma categoria con "+ selectedNode.getData().toString());
+           // System.out.println("entro en suma categoria con "+ categoriaSelec.getNombre());
+            categoriaSelec =  (Categoria)selectedNode.getData();
+           setNombreCategoria(categoriaSelec.getNombre());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,"Seleccionada categoriassss", categoriaSelec.getNombre());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            
+        }else{
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected","debes seleccionar una categoria");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }

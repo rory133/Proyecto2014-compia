@@ -61,16 +61,20 @@
                             <p:treeNode type="mp3" icon="ui-icon-video">
                                 <h:outputText value="#{doc.nombre}" />
                             </p:treeNode>
+                           
                         </p:tree>
 
-                        <p:commandButton value="Display" update="msgs" icon="ui-icon-newwin"
-                                            actionListener="#{treeSelectionView.displaySelectedSingle}"/>
+                        <p:commandButton value="Seleccionar esta categoria" update="msgs" icon="ui-icon-newwin"
+                                         actionListener="#{treeSelectionView.sumaCategoria()}">
+                                         <f:ajax event="click" render=":form2:categoria" />
+                        </p:commandButton>
                   </h:form>
 
                 </p:layoutUnit>
 
      <p:layoutUnit position="center">
-       <h:form>
+         <h:form enctype="multipart-data" id="form2">
+         <f:ajax event="click" render=":form2:categoria" />
          <p:panel id="panel" header="Crear Producto Nuevo">
            <h:outputText value="Selecciona en el panel de la izquierda en que categoría lo quieres incluir" /> 
              
@@ -87,6 +91,14 @@
             
 
 
+            <h:outputLabel for="categoria" value="Categoria: " />
+            <h:outputText id="categoria"  value="#{ treeSelectionView.nombreCategoria}">
+                 
+                 
+            </h:outputText>
+            <p:message for="categoria" />
+            <h:outputText value="#{treeSelectionView.nombreCategoria}" />
+            
             
             
             <h:outputLabel for="precio" value="precio: " />
@@ -101,7 +113,7 @@
         <h:panelGrid columns="3" cellpadding="2">         
             
             <h:outputLabel for="descripcion" value="descripcion: " />
-            <p:inputTextarea rows="5" cols="30" counter="display" maxlength="400" counterTemplate="{0} characters remaining." autoResize="false" 
+            <p:inputTextarea rows="5" cols="30" counter="display" maxlength="400"  counterTemplate="{0} caracteres restantes." autoResize="false" 
              id="descripcion" value="#{crearProductoBean.descripcion}" label="descripcion">   
               <f:validateLength minimum="10" />
             </p:inputTextarea>
@@ -116,6 +128,14 @@
             <h:outputText value="¿Poner en modo subasta?: " />
             <p:selectBooleanCheckbox value="#{crearProductoBean.enSubasta}" />
         </h:panelGrid>
+            
+      
+            <p:fileUpload fileUploadListener="#{fileUploadManagedBean.fileUploadListener}"
+                        required="true" mode="advanced" dragDropSupport="false"
+                        multiple="true" sizeLimit="1000000" fileLimit="5" update="messages"
+                        allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|docx)$/">
+                        <p:growl id="messages" showDetail="true" />
+            </p:fileUpload>
                     
        </p:panel>   
            <p:commandButton value="Crear producto"  update="panel" action="#{crearProductoBean.guardarProducto(categoria)}" icon="ui-icon-check" />
@@ -129,6 +149,10 @@
             <h:outputText value="no estas logado para poder acceder a esta pagina"    rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
             <BR/>
             <h:link outcome="/faces/index" value="volver" rendered="#{!ROLE_SOCIO and !ROLE_ADMIN}" />
+            
+            
+            
+
 
         </h:body>
 
