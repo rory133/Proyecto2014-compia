@@ -128,6 +128,25 @@
             <h:outputText value="¿Poner en modo subasta?: " />
             <p:selectBooleanCheckbox value="#{crearProductoBean.enSubasta}" />
         </h:panelGrid>
+            <!-- //////////////////////////////////////////////////////////-->
+         
+            <p:dataTable value="#{crearProductoBean.imagenesSubidas}" var="item" paginator="false" rows="5"  rowIndexVar="row" id="imagenes">
+            <p:column>
+               <f:facet name="header">
+                  <h:outputText value="Imagenes" />
+               </f:facet>
+                    
+                <h:outputLink value="../VisualizaImagen?Image_id=#{row}" target="_blank" >
+                        <h:graphicImage value="../VisualizaImagen?Image_id=#{row}" width="50" height="50"></h:graphicImage>
+               </h:outputLink>
+              </p:column>
+            </p:dataTable>
+            
+          
+            
+            
+            <!-- //////////////////////////////////////////////////////////-->
+            
       </p:panel>         
        <p:commandButton value="Crear producto"  update="panel" action="#{crearProductoBean.guardarProducto()}" icon="ui-icon-check" />
        
@@ -143,7 +162,9 @@
                     multiple="true" sizeLimit="1000000" fileLimit="5" update="messages"
                     allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
                     <p:growl id="messages" showDetail="true" />
+                    
         </p:fileUpload>
+          <f:ajax event="click" render=":form2:imagenes" />
       </h:form>
          
        <h:form>

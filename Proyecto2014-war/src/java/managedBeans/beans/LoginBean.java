@@ -116,7 +116,7 @@ public String validarUsuario(){
             session.setAttribute("usuario", datosUsuarioLogado);
             
             facesMessage=new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
-            session.setMaxInactiveInterval(20*60*60);
+            session.setMaxInactiveInterval(2000*60*60);
             /*
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage("Welcome " + usuarioLogado.getLogin() ));
