@@ -20,7 +20,7 @@
     </session-config>
     <context-param>
         <param-name>primefaces.UPLOADER</param-name>
-        <param-value>commons</param-value>
+        <param-value>auto</param-value>
     </context-param>
 
      <filter>
@@ -30,6 +30,7 @@
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
+      
     </filter-mapping>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>

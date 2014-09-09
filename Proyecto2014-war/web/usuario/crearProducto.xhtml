@@ -128,19 +128,34 @@
             <h:outputText value="¿Poner en modo subasta?: " />
             <p:selectBooleanCheckbox value="#{crearProductoBean.enSubasta}" />
         </h:panelGrid>
-            
-      
-            <p:fileUpload fileUploadListener="#{fileUploadManagedBean.fileUploadListener}"
-                        required="true" mode="advanced" dragDropSupport="false"
-                        multiple="true" sizeLimit="1000000" fileLimit="5" update="messages"
-                        allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|docx)$/">
-                        <p:growl id="messages" showDetail="true" />
-            </p:fileUpload>
-                    
-       </p:panel>   
-           <p:commandButton value="Crear producto"  update="panel" action="#{crearProductoBean.guardarProducto(categoria)}" icon="ui-icon-check" />
-     </h:form>               
+      </p:panel>         
+       <p:commandButton value="Crear producto"  update="panel" action="#{crearProductoBean.guardarProducto()}" icon="ui-icon-check" />
+       
+       
+     </h:form>   
+         
+
+         
+      <h:form enctype="multipart/form-data" id="form3">
+       <p:fileUpload fileUploadListener="#{crearProductoBean.fileUploadListener}"
+
+                    required="true" mode="advanced" dragDropSupport="false"
+                    multiple="true" sizeLimit="1000000" fileLimit="5" update="messages"
+                    allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+                    <p:growl id="messages" showDetail="true" />
+        </p:fileUpload>
+      </h:form>
+         
+       <h:form>
+         <p:commandButton value="imprimir imagenes"   action="#{crearProductoBean.imprimirImagenes()}" icon="ui-icon-check" />
+       </h:form>
+          <h:link outcome="/usuario/index" value="volver" />
+       <h:form>
+           <p:commandButton value="Salir"   action="#{crearProductoBean.salir()}" icon="ui-icon-check" />
+       </h:form>
+
     </p:layoutUnit>
+     
 
  </p:layout>
             <h:outputText value="no estas reginstrado como socio y no pudes acceder a esta pagina"    rendered="#{ROLE_ADMIN}" />
